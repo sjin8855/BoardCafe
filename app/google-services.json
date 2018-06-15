@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "207560380981",
+    "firebase_url": "https://cafereservation-e1344.firebaseio.com",
+    "project_id": "cafereservation-e1344",
+    "storage_bucket": "cafereservation-e1344.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207560380981:android:d1a665f27a953923",
+        "android_client_info": {
+          "package_name": "com.boardcafe.boardcafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207560380981-m8n9k0q2g4lbok9qbdvkh9f01982rnm3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardcafe.boardcafe",
+            "certificate_hash": "4b76466ece4ac43d020ae5d51fd106d3f9361e33"
+          }
+        },
+        {
+          "client_id": "207560380981-2v7ql89md3ig001d1foin042tudp3gf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardcafe.boardcafe",
+            "certificate_hash": "455831ebf2a65df6b267c008f2d34a53c9b59f0a"
+          }
+        },
+        {
+          "client_id": "207560380981-70pjf5qv76qlfh9p6s3qju1i305nnvje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardcafe.boardcafe",
+            "certificate_hash": "173f2bddeeb7ea1db9632f9dd67e124d266491aa"
+          }
+        },
+        {
+          "client_id": "207560380981-olpr4ccvq6ktflbc8li4b5va4ehaek5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardcafe.boardcafe",
+            "certificate_hash": "ec572580a91efcaa1fcdeb0d9162cdcfd460f8b0"
+          }
+        },
+        {
+          "client_id": "207560380981-0f0nmvoongh72rt82qvpourmfhhetdf6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boardcafe.boardcafe",
+            "certificate_hash": "aaf6c7de9460f977dea5a3b60950f949d662be81"
+          }
+        },
+        {
+          "client_id": "207560380981-t8j3bitqa8916f9a401jv12dpmhiam08.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "207560380981-t8j3bitqa8916f9a401jv12dpmhiam08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7AlY7mom6e1GOweLZln5XZ5nE1Q-0zqA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207560380981-t8j3bitqa8916f9a401jv12dpmhiam08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
