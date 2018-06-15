@@ -199,28 +199,91 @@ public class MapActivity extends AppCompatActivity
     {
 
         mGoogleMap.clear();//지도 클리어
+        List<String> list = new ArrayList<>();
+        list.add(PlaceType.BAR);
+        list.add(PlaceType.BOWLING_ALLEY);
+        list.add(PlaceType.CAFE);
+        list.add(PlaceType.CLOTHING_STORE);
+        list.add(PlaceType.JEWELRY_STORE);
+        list.add(PlaceType.LIQUOR_STORE);
+        list.add(PlaceType.MOVIE_THEATER);
+        list.add(PlaceType.NIGHT_CLUB);
+        list.add(PlaceType.PARK);
+        list.add(PlaceType.RESTAURANT);
+        list.add(PlaceType.SHOE_STORE);
+        list.add(PlaceType.SHOPPING_MALL);
 
         if (previous_marker != null)
             previous_marker.clear();//지역정보 마커 클리어
 
         NRPlaces.Builder nr = new NRPlaces.Builder();
-
-        nr.listener(MapActivity.this)
-            .key("AIzaSyDrz_6YMZVpKQqPRcLK-zMNadPvZsDGQ88")
-            .latlng(location.latitude, location.longitude)//서울
-            .radius(1000) //1000 미터 내에서 검색
-            .type(PlaceType.RESTAURANT)
-            .language("ko", "KR")
-            .build().execute();
-
+        for(int i=0; i<list.size(); i++) {
+            nr.listener(MapActivity.this)
+                    .key("AIzaSyDrz_6YMZVpKQqPRcLK-zMNadPvZsDGQ88")
+                    .latlng(location.latitude, location.longitude)//서울
+                    .radius(1000) //1000 미터 내에서 검색
+                    .type(list.get(i))
+                    .language("ko", "KR")
+                    .build().execute();
+        }
 
 
     }
 
     public void showPlaceInformationAddress(LatLng location, List<String> select)
     {
-        List<String> addList = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
+        for(int i=0; i<select.size(); i++) {
+            switch(select.get(i).toString()){
+                case "바":
+                    list.add(PlaceType.BAR);
+                    break;
+                case "볼링장":
+                    list.add(PlaceType.BOWLING_ALLEY);
+                    break;
+
+                case "카페":
+                    list.add(PlaceType.CAFE);
+                    break;
+
+                case "옷가게":
+                    list.add(PlaceType.CLOTHING_STORE);
+                    break;
+
+                case "보석가게":
+                    list.add(PlaceType.JEWELRY_STORE);
+                    break;
+
+                case "주류점":
+                    list.add(PlaceType.LIQUOR_STORE);
+                    break;
+
+                case "영화관":
+                    list.add(PlaceType.MOVIE_THEATER);
+                    break;
+
+                case "클럽":
+                    list.add(PlaceType.NIGHT_CLUB);
+                    break;
+
+                case "공원":
+                    list.add(PlaceType.PARK);
+                    break;
+
+                case "음식점":
+                    list.add(PlaceType.RESTAURANT);
+                    break;
+
+                case "신발가게":
+                    list.add(PlaceType.SHOE_STORE);
+                    break;
+
+                case "쇼핑몰":
+                    list.add(PlaceType.SHOPPING_MALL);
+                    break;
+            }
+        }
 
         mGoogleMap.clear();//지도 클리어
 
@@ -229,13 +292,15 @@ public class MapActivity extends AppCompatActivity
 
         NRPlaces.Builder nr = new NRPlaces.Builder();
 
-        nr.listener(MapActivity.this)
-                .key("AIzaSyDrz_6YMZVpKQqPRcLK-zMNadPvZsDGQ88")
-                .latlng(location.latitude, location.longitude)//서울
-                .radius(1000) //1000 미터 내에서 검색
-                .type(PlaceType.RESTAURANT) //음식점
-                .language("ko", "KR")
-                .build().execute();
+        for(int i=0; i<list.size(); i++) {
+            nr.listener(MapActivity.this)
+                    .key("AIzaSyDrz_6YMZVpKQqPRcLK-zMNadPvZsDGQ88")
+                    .latlng(location.latitude, location.longitude)//서울
+                    .radius(1000) //1000 미터 내에서 검색
+                    .type(list.get(i)) //음식점
+                    .language("ko", "KR")
+                    .build().execute();
+        }
 
     }
 
