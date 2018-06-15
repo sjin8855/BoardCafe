@@ -33,9 +33,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by Sangjin-Lee on 2017-11-10.
- */
 
 
 public class MainActivity extends AppCompatActivity{
@@ -76,8 +73,9 @@ public class MainActivity extends AppCompatActivity{
     //광고배너
     @OnClick(R.id.advertise)
     public void advertise() {
-        String url = "https://searchad.naver.com/";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        Intent intent = new Intent(MainActivity.this, MapActivity.class/*다음으로 이동할 곳*/);
+        intent.putExtra("googleid", googleUid);
+        //intent.putExtra("itemlist", itemList);
         startActivity(intent);
     }
     //로그아웃
