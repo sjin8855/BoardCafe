@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
 
     @OnClick(R.id.confirmitem)
     public void confirmitem () {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class/*다음으로 이동할 곳*/);
+        Intent intent = new Intent(MainActivity.this, BoardActivity.class/*다음으로 이동할 곳*/);
         intent.putExtra("googleid", googleUid);
         //intent.putExtra("itemlist", itemList);
         startActivity(intent);
