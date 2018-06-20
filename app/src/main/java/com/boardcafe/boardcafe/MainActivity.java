@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity{
     //대여하기
     @OnClick(R.id.rentbanner)
     public void rent () {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class/*다음으로 이동할 곳*/);
+        Intent intent = new Intent(MainActivity.this, CafeActivity.class/*다음으로 이동할 곳*/);
         intent.putExtra("googleid", googleUid);
         //intent.putExtra("itemlist", itemList);
         startActivity(intent);
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity{
                         break;
 
                     case R.id.action_withdraw:
-                        Intent intent_withdraw = new Intent(MainActivity.this, LoginActivity.class/*다음으로 이동할 곳*/);
+                        Intent intent_withdraw = new Intent(MainActivity.this, CafeActivity.class/*다음으로 이동할 곳*/);
                         intent_withdraw.putExtra("googleid", googleUid);
                         //intent_withdraw.putExtra("itemlist", itemList);
                         startActivity(intent_withdraw);

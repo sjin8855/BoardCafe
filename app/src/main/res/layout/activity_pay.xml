@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/table_id"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="51dp"
+        android:text="선택한 테이블" />
+
+    <Button
+        android:id="@+id/pay_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_toStartOf="@+id/calender_text"
+        android:text="예약" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/pay_check"
+        android:layout_marginEnd="87dp"
+        android:text="취소하기" />
+
+    <TextView
+        android:id="@+id/calender_text"
+        android:layout_width="123dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/calender"
+        android:layout_marginEnd="106dp" />
+
+    <Button
+        android:id="@+id/calender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="132dp"
+        android:text="날짜 입력" />
+
+    <Button
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/calender"
+        android:layout_marginTop="226dp"
+        android:text="시간 입력" />
+
+    <TextView
+        android:id="@+id/time_text"
+        android:layout_width="123dp"
+        android:layout_height="42dp"
+        android:layout_alignStart="@+id/calender_text"
+        android:layout_alignTop="@+id/time" />
+
+</RelativeLayout>
