@@ -13,16 +13,19 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="81dp"
         android:layout_marginTop="51dp"
-        android:text="선택한 테이블" />
+        android:text="선택한 테이블"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="81dp" />
 
     <Button
         android:id="@+id/pay_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="46dp"
         android:layout_toStartOf="@+id/calender_text"
-        android:text="예약" />
+        android:text="예약"
+        android:layout_toLeftOf="@+id/calender_text" />
 
     <Button
         android:id="@+id/cancel"
@@ -31,40 +34,105 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/pay_check"
         android:layout_marginEnd="87dp"
-        android:text="취소하기" />
+        android:text="취소하기"
+        android:layout_marginRight="87dp"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:id="@+id/calender_text"
         android:layout_width="123dp"
         android:layout_height="45dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/calender"
-        android:layout_marginEnd="106dp" />
+        android:layout_alignEnd="@+id/cancel"
+        android:layout_alignTop="@+id/input_calender"
+        android:layout_alignRight="@+id/cancel" />
 
     <Button
-        android:id="@+id/calender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="132dp"
-        android:text="날짜 입력" />
-
-    <Button
-        android:id="@+id/time"
+        android:id="@+id/input_calender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/calender"
-        android:layout_marginTop="226dp"
-        android:text="시간 입력" />
+        android:layout_alignStart="@+id/input_time"
+        android:layout_marginTop="85dp"
+        android:text="날짜 입력"
+        android:layout_alignLeft="@+id/input_time" />
+
+    <Button
+        android:id="@+id/input_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="149dp"
+        android:text="시간 입력"
+        android:layout_alignLeft="@+id/textView3" />
 
     <TextView
         android:id="@+id/time_text"
         android:layout_width="123dp"
         android:layout_height="42dp"
         android:layout_alignStart="@+id/calender_text"
-        android:layout_alignTop="@+id/time" />
+        android:layout_alignTop="@+id/input_time"
+        android:layout_alignLeft="@+id/calender_text" />
+
+    <TextView
+        android:id="@+id/total_cost"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="129dp"
+        android:layout_marginEnd="77dp"
+        android:text="총 금액"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="77dp" />
+
+    <TextView
+        android:id="@+id/My_money"
+        android:layout_width="88dp"
+        android:layout_height="38dp"
+        android:layout_alignStart="@+id/pay_check"
+        android:layout_alignTop="@+id/total_cost"
+        android:text="내 잔액"
+        android:layout_alignLeft="@+id/pay_check" />
+
+    <EditText
+        android:id="@+id/input_number"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/total_cost"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="214dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignRight="@+id/total_cost" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/input_number"
+        android:layout_marginStart="58dp"
+        android:text="인원수 입력"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="58dp" />
+
+    <TextView
+        android:id="@+id/play_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="236dp" />
+
+    <Button
+        android:id="@+id/input_playtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/input_calender"
+        android:layout_marginTop="229dp"
+        android:text="이용시간입력"
+        android:layout_alignLeft="@+id/input_calender" />
 
 </RelativeLayout>
