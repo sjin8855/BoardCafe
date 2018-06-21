@@ -39,7 +39,7 @@ public class BoardActivity extends AppCompatActivity{
         adapter = new BoardAdapter(getApplicationContext());
 
         listView.setAdapter(adapter);
-        
+
         mData.child("Contents").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
