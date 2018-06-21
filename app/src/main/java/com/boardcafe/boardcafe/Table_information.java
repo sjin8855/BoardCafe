@@ -7,12 +7,12 @@ public class Table_information {
 
     public Table_information(){
         table_id = null;
-        reservation = "false";
+        reservation = "true";
         number = null;
     }
     public Table_information(String table_id,String number){
         this.table_id = table_id;
-        this.reservation = "true";
+        this.reservation = "false";
         this.number = number;
     }
     public String getTable_id(){return this.table_id;}

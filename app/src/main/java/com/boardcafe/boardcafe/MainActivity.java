@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity{
     private GoogleApiClient mGoogleApiClient;
     private DatabaseReference mUserReference;
     private DatabaseReference mItemReference;
-    private String googleUid;
+    String googleUid;
     static public String mUserKey;   // 자기 유저키
     private User Im;
     private int myAccount;

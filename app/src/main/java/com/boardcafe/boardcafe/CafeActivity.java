@@ -37,8 +37,8 @@ public class CafeActivity extends AppCompatActivity {
     List<String> game_list = new ArrayList<>();
     List<String> menu_list = new ArrayList<>();
     ListView list;
-    Intent _intent;
     static String list_check = "";
+    String google;
 
 
     @Override
@@ -52,15 +52,8 @@ public class CafeActivity extends AppCompatActivity {
         list.setVisibility(View.INVISIBLE);
         game_adapter = new ArrayAdapter<String>(this, R.layout.parent_list, R.id.parent_text, game_list);
         menu_adapter = new ArrayAdapter<String>(this, R.layout.parent_list, R.id.parent_text, menu_list);
+        google = getIntent().getStringExtra("googleid");
 
-        reservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                _intent = getIntent();
-                _intent = new Intent(getApplicationContext(), Reservation.class);
-                startActivity(_intent);
-            }
-        });
         game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +68,6 @@ public class CafeActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             String key = snapshot.getKey();
-                            Log.i("확인", key);
                             game_list.add(key);
                         }
                         game_adapter.notifyDataSetChanged();
@@ -109,7 +101,6 @@ public class CafeActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Hero_menu cate = dataSnapshot.getValue(Hero_menu.class);
-                                    Log.i("이름", cate.getname());
                                     menu_list.add(cate.getname());
                                     menu_adapter.notifyDataSetChanged();
                                 }
@@ -134,14 +125,15 @@ public class CafeActivity extends AppCompatActivity {
             }
         });
 
+
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _intent = new Intent(getApplicationContext(), Reservation.class);
+                Intent _intent = new Intent(CafeActivity.this, Reservation.class);
+                _intent.putExtra("googleId",google);
                 startActivity(_intent);
             }
         });
-
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

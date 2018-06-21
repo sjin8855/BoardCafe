@@ -43,20 +43,15 @@ public class Reservation_pay extends AppCompatActivity {
     String date, output_time, number, output_date, playtime;
     List<Reservation_information> user_reservation = new ArrayList<>();
     List<Table_information> table_information = new ArrayList<>();
-    List<String> user_information = new ArrayList<>();
-    List<String> key_save = new ArrayList<>();
     int Myear, Mmonth, Mday, Mhour, Mminute;
     private DatabaseReference mReserveReference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference reserve_check;
     private DatabaseReference table_check;
     private DatabaseReference user_check;
-    DatabaseReference user_check2;
-    DatabaseReference user_check3;
     Map<String, Object> update = new HashMap<String, Object>();
     AlertDialog.Builder time_list;
     String[] time_select = {"1시간", "2시간", "3시간", "4시간", "5시간", "6시간", "7시간", "8시간"};
-    int len, count;
-    int location = 0;
+    String key_location,googleid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,8 +62,8 @@ public class Reservation_pay extends AppCompatActivity {
         _table_id = (TextView) findViewById(R.id.table_id);
         calender_text = (TextView) findViewById(R.id.calender_text);
         time_text = (TextView) findViewById(R.id.time_text);
-        calender = (Button) findViewById(R.id.input_calender);
-        time = (Button) findViewById(R.id.input_time);
+        calender = (Button) findViewById(R.id.calender);
+        time = (Button) findViewById(R.id.time);
         pay_check = (Button) findViewById(R.id.pay_check);
         cancel = (Button) findViewById(R.id.cancel);
         input_number = (EditText) findViewById(R.id.input_number);
@@ -86,15 +81,14 @@ public class Reservation_pay extends AppCompatActivity {
         Mminute = cal.get(Calendar.MINUTE);
         table_id = _intent.getStringExtra("table_id");
         table_reservation = _intent.getStringExtra("reservation");
+        googleid = _intent.getStringExtra("google_id");
         _table_id.setText(table_id + "번 테이블 예약 설정");
         My_money.setText(LoginActivity.currentUser.getuserAccount() + "원");
 
 
-        key_save.clear();
         reserve_check = mReserveReference.child("Reservation");
         table_check = mReserveReference.child("Table");
-        user_check = mReserveReference.child("Users");
-        key_save.add("null");
+        user_check = mReserveReference.child("Users").child(googleid);
 
         reserve_check.addValueEventListener(new ValueEventListener() {
             DatabaseReference check;
@@ -148,29 +142,15 @@ public class Reservation_pay extends AppCompatActivity {
 
             }
         });
-        user_check.addValueEventListener(new ValueEventListener() {
-            String key_check;
-
+        user_check.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot parent1 : dataSnapshot.getChildren()) {
-                    user_check2 = user_check.child(parent1.getKey());
-                    key_save.add(parent1.getKey());
-                    key_check = parent1.getKey();
-                    user_check2.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot2) {
-                            for (DataSnapshot parent2 : dataSnapshot2.getChildren()) {
-                                key_save.add(parent2.getKey());
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
+                    User user = parent1.getValue(User.class);
+                    key_location = parent1.getKey();
                 }
+                Log.i("key",key_location);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -209,32 +189,11 @@ public class Reservation_pay extends AppCompatActivity {
         pay_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                len = (key_save.size() - 1) / 2;
-                Log.i("dd", String.valueOf(key_save.size()));
-                for (count = 1; count <= len; count++) {
-                    user_check3 = mReserveReference.child("Users").child(key_save.get(count)).child(key_save.get(count + len));
-                    user_check3.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            User user = dataSnapshot.getValue(User.class);
-                            user_information.add(user.getUserEmail());
-                            if (LoginActivity.currentUser.getUserEmail().equals(user.getUserEmail())) {
-                                location++;
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
-                    Log.i("location",String.valueOf(location));
-                }
 
                 _intent = new Intent(getApplicationContext(), CafeActivity.class);
                 boolean reserve_check = false;
                 int total = 0;
                 number = input_number.getText().toString();
-                Log.i("이것도", key_save.get(4));
-                Log.i("이것도", key_save.get(1));
 
                 for (int i = 0; i < table_information.size(); i++) {
                     String temp;
@@ -270,11 +229,32 @@ public class Reservation_pay extends AppCompatActivity {
                         Log.i("잔액", String.valueOf(LoginActivity.currentUser.getuserAccount()));
                         User up_user = new User(LoginActivity.currentUser.getUserEmail(), LoginActivity.currentUser.getuserAccount());
                         DatabaseReference user_update;
-                        Log.i("설마",key_save.get(location));
-                        user_update = mReserveReference.child("Users").child(key_save.get(location));
-                        update.put(key_save.get(location + len), up_user);
+                        user_update = mReserveReference.child("Users").child(googleid);
+                        update.put(key_location, up_user);
                         user_update.updateChildren(update);
+
+                        update.clear();
+                        int reser_count = user_reservation.size();
+                        Reservation_information RI = new Reservation_information(LoginActivity.currentUser.getUserEmail(),output_date + "_" + output_time,
+                                total , table_id,number+"명");
+                        DatabaseReference reserve_update;
+                        reserve_update = mReserveReference.child("Reservation");
+                        update.put(String.valueOf(reser_count+1),RI);
+                        reserve_update.updateChildren(update);
+
+                        update.clear();
+                        DatabaseReference table_update;
+                        table_update = mReserveReference.child("Table");
+                        for(int i=0;i<table_information.size();i++){
+                            if(table_information.get(i).getTable_id().equals(table_id)){
+                                update.put(table_id,new Table_information(table_id,table_information.get(i).getNumber()));
+                            }
+                        }
+                        table_update.updateChildren(update);
+
+
                         Toast.makeText(Reservation_pay.this, "예약되었습니다.", Toast.LENGTH_LONG).show();
+                        _intent.putExtra("googleid",googleid);
                         startActivity(_intent);
                     }
                 }

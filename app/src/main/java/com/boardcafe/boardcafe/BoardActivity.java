@@ -1,14 +1,23 @@
 package com.boardcafe.boardcafe;
 
+import android.accessibilityservice.AccessibilityService;
+import android.app.Service;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -22,7 +31,8 @@ public class BoardActivity extends AppCompatActivity{
 
     EditText editText1;
     EditText editText2;
-
+    SoftKeyboard softKeyboard;
+    LinearLayout ll;
     private DatabaseReference mData;
 
     @Override
@@ -35,8 +45,35 @@ public class BoardActivity extends AppCompatActivity{
         editText1 = (EditText) findViewById(R.id.editText1);
         editText2 = (EditText) findViewById(R.id.editText2);
 
-        ListView listView = (ListView) findViewById(R.id._listView);
+        final ListView listView = (ListView) findViewById(R.id._listView);
         adapter = new BoardAdapter(getApplicationContext());
+
+        ll = (LinearLayout)findViewById(R.id.linearLayout);
+
+        InputMethodManager controlManager = (InputMethodManager)getSystemService(Service.INPUT_METHOD_SERVICE);
+        softKeyboard = new SoftKeyboard(ll, controlManager);
+        softKeyboard.setSoftKeyboardCallback(new SoftKeyboard.SoftKeyboardChanged() {
+                                                 @Override
+                                                 public void onSoftKeyboardHide() {
+                                                     new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                         @Override
+                                                         public void run() {
+                                                             Toast.makeText(getApplication(), "키보드 내려감", Toast.LENGTH_SHORT).show();
+                                                         }
+                                                     });
+                                                 }
+
+                                                 @Override
+                                                 public void onSoftKeyboardShow() {
+                                                     new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                         @Override
+                                                         public void run() {
+                                                             Toast.makeText(getApplication(), "키보드 올라감", Toast.LENGTH_SHORT).show();
+                                                             listView.setVisibility(View.INVISIBLE);
+                                                         }
+                                                     });
+                                                 }
+                                             });
 
         listView.setAdapter(adapter);
 
@@ -91,5 +128,16 @@ public class BoardActivity extends AppCompatActivity{
                     imm.hideSoftInputFromWindow(editText2.getWindowToken(), 0);
                 }
         });
+    }
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        softKeyboard.unRegisterSoftKeyboardCallback();
+    }
+
+    public float dpToPx(float value){
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, metrics);
     }
 }

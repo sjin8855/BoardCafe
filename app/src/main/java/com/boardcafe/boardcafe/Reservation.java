@@ -32,14 +32,14 @@ public class Reservation extends AppCompatActivity {
     private DatabaseReference table_check;
     List<Integer> _img = new ArrayList<>();
     MyAdapter adapter;
-    Intent _intent;
+    String google_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         table_view = (GridView) findViewById(R.id.table_list);
-
+        google_id = getIntent().getStringExtra("googleId");
 
         adapter = new MyAdapter(this, R.layout.table, _img);
         table_view.setAdapter(adapter);
@@ -56,10 +56,17 @@ public class Reservation extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Table_information ta = dataSnapshot.getValue(Table_information.class);
-                            if (ta.getReservation().equals("true")) {
-                                _img.add(R.drawable.ic_icon_cafe); // 테이블이 예약 되있을 경우 이미지로 대체
-                            } else {
-                                _img.add(R.drawable.ic_icon_logout); // 예약 안되있을때 이미지로 대체
+                            if (ta.getReservation().equals("true") && ta.getNumber().equals("3~4명")) {
+                                _img.add(R.drawable.three); // 테이블이 예약 되있을 경우 이미지로 대체(3~4명테이블)
+                            }
+                            else if(ta.getReservation().equals("true") && ta.getNumber().equals("5~6명")) {
+                                _img.add(R.drawable.five); // 테이블이 예약 되있고 5~6명 테이블
+                            }
+                            else if(ta.getReservation().equals("false") && ta.getNumber().equals("3~4명")){
+                                _img.add(R.drawable.ic_icon_cafe); // 테이블이 예약 되있을 경우 이미지로 대체(3~4인용)
+                            }
+                            else{
+                                _img.add(R.drawable.ic_icon_logout); // 예약 안되있을때 이미지로 대체 5~6인용
                             }
                             table_info.add(ta);
                             adapter.notifyDataSetChanged();
@@ -82,12 +89,14 @@ public class Reservation extends AppCompatActivity {
     {
         @Override
         public void onItemClick (AdapterView < ? > parent, View view,int position, long id){
-        _intent = new Intent(getApplicationContext(), Reservation_pay.class);
+        Intent _intent = new Intent(getApplicationContext(), Reservation_pay.class);
 
         if (table_info.get(position).getReservation().equals("true")) {
             Toast.makeText(Reservation.this, "예약하러 갑시다", Toast.LENGTH_LONG).show();
             _intent.putExtra("table_id",table_info.get(position).getTable_id());
             _intent.putExtra("reservation",table_info.get(position).getReservation());
+            _intent.putExtra("google_id",google_id);
+
             startActivity(_intent);
         } else {
             Toast.makeText(Reservation.this, "이미 예약이 되있는 테이블입니다. ", Toast.LENGTH_LONG).show();
