@@ -3,8 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_activity_reservation">
 
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#3F51B5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
     <GridView
         android:id="@+id/table_list"
         android:layout_width="match_parent"
@@ -14,13 +22,24 @@
         android:layout_marginTop="100dp"
         android:numColumns="2" />
 
-    <TextView
-        android:layout_width="107dp"
-        android:layout_height="37dp"
-        android:layout_alignParentStart="true"
+    <ImageView
+        android:id="@+id/what"
+        android:layout_width="345dp"
+        android:layout_height="54dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="28dp"
-        android:text="현재 예약 상황" />
+        android:src="@drawable/reservation_state"
+        android:tint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintLeft_toLeftOf="@+id/view"
+        app:layout_constraintRight_toRightOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="53dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back" />
+
 
 </RelativeLayout>

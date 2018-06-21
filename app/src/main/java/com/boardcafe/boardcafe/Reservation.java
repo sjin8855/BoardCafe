@@ -27,26 +27,25 @@ import java.util.List;
 
 public class Reservation extends AppCompatActivity {
     GridView table_view;
-    Reservation User_reservation;
     static List<Table_information> table_info = new ArrayList<>();
     private DatabaseReference mTableReference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference table_check;
     List<Integer> _img = new ArrayList<>();
     MyAdapter adapter;
+    Intent _intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         table_view = (GridView) findViewById(R.id.table_list);
-        User_reservation = new Reservation();
 
 
         adapter = new MyAdapter(this, R.layout.table, _img);
         table_view.setAdapter(adapter);
 
         table_check = mTableReference.child("Table");
-        table_check.addListenerForSingleValueEvent(new ValueEventListener() {
+        table_check.addValueEventListener(new ValueEventListener() {
             DatabaseReference re_check;
 
             @Override
@@ -59,14 +58,11 @@ public class Reservation extends AppCompatActivity {
                             Table_information ta = dataSnapshot.getValue(Table_information.class);
                             if (ta.getReservation().equals("true")) {
                                 _img.add(R.drawable.ic_icon_cafe); // 테이블이 예약 되있을 경우 이미지로 대체
-                                Log.i("ima", String.valueOf(_img.get(0)));
                             } else {
                                 _img.add(R.drawable.ic_icon_logout); // 예약 안되있을때 이미지로 대체
-                                Log.i("ima", String.valueOf(_img.get(0)));
                             }
                             table_info.add(ta);
                             adapter.notifyDataSetChanged();
-                            Log.i("table", table_info.get(0).getTable_id());
                         }
 
                         @Override
@@ -86,11 +82,12 @@ public class Reservation extends AppCompatActivity {
     {
         @Override
         public void onItemClick (AdapterView < ? > parent, View view,int position, long id){
-        Intent _intent = new Intent(getApplicationContext(), Reservation_pay.class);
+        _intent = new Intent(getApplicationContext(), Reservation_pay.class);
 
         if (table_info.get(position).getReservation().equals("true")) {
-            Toast.makeText(Reservation.this, "예약하러 갑시다", Toast.LENGTH_SHORT).show();
-            _intent.putExtra("table_id",String.valueOf(position+1));
+            Toast.makeText(Reservation.this, "예약하러 갑시다", Toast.LENGTH_LONG).show();
+            _intent.putExtra("table_id",table_info.get(position).getTable_id());
+            _intent.putExtra("reservation",table_info.get(position).getReservation());
             startActivity(_intent);
         } else {
             Toast.makeText(Reservation.this, "이미 예약이 되있는 테이블입니다. ", Toast.LENGTH_LONG).show();
