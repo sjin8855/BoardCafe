@@ -40,6 +40,10 @@
         <activity
             android:name=".MapActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".BoardActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:screenOrientation="portrait" />
         <activity android:name=".CafeActivity"></activity>
         <activity android:name=".Reservation"></activity>
         <activity android:name=".Reservation_pay"></activity>
