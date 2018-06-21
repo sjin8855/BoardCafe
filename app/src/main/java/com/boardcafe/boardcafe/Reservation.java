@@ -57,10 +57,10 @@ public class Reservation extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Table_information ta = dataSnapshot.getValue(Table_information.class);
                             if (ta.getReservation().equals("true") && ta.getNumber().equals("3~4명")) {
-                                _img.add(R.drawable.ic_icon_cafe); // 테이블이 예약 되있을 경우 이미지로 대체(3~4명테이블)
+                                _img.add(R.drawable.three); // 테이블이 예약 되있을 경우 이미지로 대체(3~4명테이블)
                             }
                             else if(ta.getReservation().equals("true") && ta.getNumber().equals("5~6명")) {
-                                _img.add(R.drawable.ic_icon_logout); // 테이블이 예약 되있고 5~6명 테이블
+                                _img.add(R.drawable.five); // 테이블이 예약 되있고 5~6명 테이블
                             }
                             else if(ta.getReservation().equals("false") && ta.getNumber().equals("3~4명")){
                                 _img.add(R.drawable.ic_icon_cafe); // 테이블이 예약 되있을 경우 이미지로 대체(3~4인용)

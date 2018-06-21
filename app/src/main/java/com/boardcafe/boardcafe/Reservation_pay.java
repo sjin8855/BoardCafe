@@ -62,8 +62,8 @@ public class Reservation_pay extends AppCompatActivity {
         _table_id = (TextView) findViewById(R.id.table_id);
         calender_text = (TextView) findViewById(R.id.calender_text);
         time_text = (TextView) findViewById(R.id.time_text);
-        calender = (Button) findViewById(R.id.input_calender);
-        time = (Button) findViewById(R.id.input_time);
+        calender = (Button) findViewById(R.id.calender);
+        time = (Button) findViewById(R.id.time);
         pay_check = (Button) findViewById(R.id.pay_check);
         cancel = (Button) findViewById(R.id.cancel);
         input_number = (EditText) findViewById(R.id.input_number);
